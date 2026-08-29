@@ -1,8 +1,3 @@
-Absolutely. Remove **Development Phases** and the **Future/Future Vision/Roadmap** sections. Keep the README focused on what Smart Traffic 2.0 currently contains.
-
-Use this cleaned version:
-
-````markdown
 # 🚦 Smart Traffic 2.0
 
 ### Real-Time Traffic Monitoring, Vehicle Detection & Accident Risk Prediction
