@@ -1,8 +1,3 @@
-Absolutely. Since **Smart Traffic 2.0 is the next version of your existing 1.0 project**, this README should focus on the **real-time upgrade**, while clearly connecting it to 1.0.
-
-Copy this entire content into `smart-traffic-2.0/README.md`:
-
-````markdown
 # 🚦 Smart Traffic 2.0
 
 ### Real-Time Intelligent Traffic Safety & Accident Risk Prediction
