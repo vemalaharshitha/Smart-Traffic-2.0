@@ -1,24 +1,27 @@
+Absolutely. Remove **Development Phases** and the **Future/Future Vision/Roadmap** sections. Keep the README focused on what Smart Traffic 2.0 currently contains.
+
+Use this cleaned version:
+
+````markdown
 # 🚦 Smart Traffic 2.0
 
-### Real-Time Intelligent Traffic Safety & Accident Risk Prediction
+### Real-Time Traffic Monitoring, Vehicle Detection & Accident Risk Prediction
 
-Smart Traffic 2.0 is the advanced version of the **Smart Accident Visualization 1.0** project.
-
-Version 1.0 focused on historical road accident analysis, risk assessment, visualization, and machine learning. **Smart Traffic 2.0 extends this foundation toward a real-time intelligent traffic safety system.**
+Smart Traffic 2.0 is the advanced version of **Smart Accident Visualization 1.0**. It extends historical accident analysis into a computer-vision-based traffic monitoring system using traffic videos, YOLO vehicle detection, OpenCV, traffic-density analysis and risk prediction.
 
 ---
 
-## 🎯 Vision
+## 🎯 Objectives
 
-Transform historical accident analysis into a system capable of:
-
-- 🌦️ Monitoring real-time weather
-- 🚗 Monitoring traffic conditions
-- 🤖 Predicting accident risk
-- 🗺️ Visualizing risk geographically
-- 🚨 Generating safety alerts
-- 📊 Providing a live dashboard
-- 🌐 Supporting a future web application
+- Analyze traffic using video data
+- Detect vehicles automatically
+- Count different vehicle types
+- Estimate traffic density
+- Identify traffic congestion
+- Calculate traffic risk
+- Integrate accident-risk analysis
+- Build a visual traffic monitoring system
+- Create an intelligent traffic analysis workflow
 
 ---
 
@@ -26,381 +29,261 @@ Transform historical accident analysis into a system capable of:
 
 | Smart Traffic 1.0 | Smart Traffic 2.0 |
 |---|---|
-| Historical accident data | Real-time data |
-| Static analysis | Live monitoring |
-| Risk analysis | Real-time risk prediction |
-| Static visualizations | Interactive maps |
-| ML severity prediction | Real-time ML prediction |
-| PDF / HTML reports | Live dashboard |
-| Offline analysis | Continuous data processing |
+| Historical accident data | Traffic video data |
+| Static analysis | Video-based monitoring |
+| Accident risk analysis | Traffic risk analysis |
+| Machine learning | Computer vision + ML |
+| Static visualizations | Visual vehicle detection |
+| Historical accident patterns | Traffic monitoring |
 
 ---
 
-# 🧠 Existing 1.0 Foundation
+# 🎥 Traffic Video Analysis
 
-Smart Traffic 2.0 builds on the analysis already completed in Smart Traffic 1.0.
+Smart Traffic 2.0 uses traffic video as the primary input for computer vision.
 
-### 1. Accident Analysis
-
-- City-wise analysis
-- Year-wise analysis
-- Hour-wise analysis
-- Severity analysis
-- Accident cause analysis
-- Vehicle and casualty analysis
-
-### 2. Risk Analysis
-
-- Risk-score analysis
-- Weather risk
-- Traffic risk
-- Combined weather + traffic risk
-- Risk levels
-- Accident hotspots
-
-### 3. Machine Learning
-
-- Random Forest
-- Logistic Regression
-- Model evaluation
-- Confusion matrices
-- Feature importance
-- Accident severity prediction
-
-### 4. Key 1.0 Finding
-
-> 🚨 **Fog + High Traffic + Fatal Severity → Average Risk 0.919**
-
----
-
-# 🚀 Smart Traffic 2.0 Goals
-
-## 🌦️ 1. Real-Time Weather
-
-Integrate live weather information such as:
-
-- Temperature
-- Rain
-- Fog
-- Visibility
-- Wind
-- Weather condition
-
-The system will use weather information as a real-time risk factor.
-
----
-
-## 🚗 2. Real-Time Traffic
-
-Future traffic integration will provide information such as:
-
-- Traffic density
-- Congestion
-- Traffic speed
-- Road conditions
-- Traffic hotspots
-
----
-
-## 🤖 3. Real-Time Risk Prediction
-
-The existing machine-learning foundation will be extended to calculate a live accident-risk score.
-
-### Concept
+### Current Test Video
 
 ```text
-Live Weather
-     +
-Live Traffic
-     +
-Location
-     +
-Time
-     +
-Historical Risk
-     ↓
-Risk Prediction Model
-     ↓
-Real-Time Risk Score
-     ↓
-Low / Medium / High / Critical
+Traffic_Video.mp4
 ````
 
----
+### Video Information
 
-# 🗺️ 4. Interactive Risk Map
-
-The system will provide an interactive map showing:
-
-* Accident hotspots
-* High-risk areas
-* Traffic conditions
-* Weather conditions
-* Risk levels
-* Potential danger zones
+| Property    |         Value |
+| ----------- | ------------: |
+| Duration    | 15.02 seconds |
+| Resolution  |   1920 × 1080 |
+| Frames      |           900 |
+| Frame Rate  |    ~59.94 FPS |
+| Video Codec |         H.264 |
 
 ---
 
-# 🚨 5. Smart Safety Alerts
+# 🤖 YOLO Vehicle Detection
 
-The future system can generate alerts when risk becomes high.
+The project uses **YOLO11n** for object detection.
+
+The model detects common traffic objects including:
+
+* 🚗 Cars
+* 🏍️ Motorcycles
+* 🚌 Buses
+* 🚚 Trucks
+* 👤 Persons
+
+### Initial Detection Test
+
+The first video frame produced:
+
+| Object      | Detected |
+| ----------- | -------: |
+| Persons     |        7 |
+| Cars        |        2 |
+| Motorcycles |        5 |
+| Trucks      |        1 |
+| Buses       |        0 |
+
+### Vehicles Detected
+
+**8 vehicles**
+
+```text
+2 Cars
++
+5 Motorcycles
++
+1 Truck
+=
+8 Vehicles
+```
+
+---
+
+# 👁️ Computer Vision Pipeline
+
+```text
+Traffic_Video.mp4
+        ↓
+Video Frame
+        ↓
+YOLO11n
+        ↓
+Object Detection
+        ↓
+Vehicle Classification
+        ↓
+Vehicle Counting
+        ↓
+Traffic Density
+        ↓
+Risk Assessment
+        ↓
+Visual Traffic Monitoring
+```
+
+---
+
+# 🚦 Traffic Monitoring
+
+The system analyzes detected vehicles in video frames.
+
+Vehicle categories include:
+
+```text
+🚗 Cars
+🏍️ Motorcycles
+🚌 Buses
+🚚 Trucks
+```
+
+Vehicle detection provides the basis for traffic-density analysis.
+
+---
+
+# 📊 Traffic Density
+
+The current prototype uses vehicle count to estimate traffic conditions.
+
+| Vehicles Detected | Traffic Level |
+| ----------------: | ------------- |
+|               0–6 | 🟢 Low        |
+|              7–14 | 🟡 Medium     |
+|               15+ | 🔴 High       |
+
+These are prototype traffic-density thresholds used for demonstration.
+
+---
+
+# ⚠️ Traffic Risk
+
+Traffic density is converted into a simple risk status:
+
+```text
+LOW TRAFFIC
+     ↓
+LOW RISK
+
+MEDIUM TRAFFIC
+     ↓
+MEDIUM RISK
+
+HIGH TRAFFIC
+     ↓
+HIGH RISK
+```
+
+---
+
+# 🖥️ Visual Demonstration
+
+The system processes the traffic video and displays detection information directly on the video.
 
 Example:
 
 ```text
-🚨 HIGH RISK DETECTED
-
-Location: High-risk zone
-Weather: Fog
-Traffic: High
-Risk Score: 0.91
-
-Recommendation:
-Drive carefully and reduce speed.
+┌─────────────────────────────────────┐
+│                                     │
+│       🚗        🏍️       🚚          │
+│      [CAR]   [MOTORCYCLE] [TRUCK]   │
+│                                     │
+├─────────────────────────────────────┤
+│ Vehicles: 8                         │
+│ Cars: 2   Bikes: 5   Trucks: 1     │
+│ Traffic: MEDIUM                     │
+│ Risk: MEDIUM RISK                   │
+└─────────────────────────────────────┘
 ```
 
----
-
-# 📊 6. Live Dashboard
-
-The Smart Traffic 2.0 dashboard will provide real-time information including:
-
-* Total monitored locations
-* Current traffic level
-* Current weather
-* Current risk score
-* High-risk locations
-* Accident statistics
-* Risk trends
-* Interactive map
-* Safety alerts
+The visual system is designed to make vehicle detection and traffic analysis easy to demonstrate.
 
 ---
 
-# 🏗️ System Architecture
+# 🧠 Smart Traffic 1.0 Foundation
+
+Smart Traffic 2.0 builds on the previous accident-analysis project.
+
+Important Smart Traffic 1.0 findings include:
+
+* Chandigarh recorded **2,577 accidents**
+* Fog had the highest average weather risk: **0.589**
+* High traffic had the highest average traffic risk: **0.595**
+* Fog + High Traffic + Fatal had average risk of **0.919**
+* Random Forest accuracy: **68.45%**
+* Fatal accident F1-score: **99.32%**
+
+---
+
+# 🏗️ Smart Traffic 2.0 Architecture
 
 ```text
-             REAL-TIME DATA
-                    │
-          ┌─────────┴─────────┐
-          ↓                   ↓
-      Weather API        Traffic Data
-          │                   │
-          └─────────┬─────────┘
-                    ↓
-             Data Processing
-                    ↓
-             Feature Creation
-                    ↓
-          Risk Prediction Model
-                    ↓
-              Risk Score
-                    ↓
-        ┌───────────┼───────────┐
-        ↓           ↓           ↓
-      Map       Dashboard     Alerts
-        │           │           │
-        └───────────┴───────────┘
-                    ↓
-             Smart Traffic 2.0
+                 TRAFFIC VIDEO
+                       ↓
+                Video Processing
+                       ↓
+                    YOLO11n
+                       ↓
+              Vehicle Detection
+                       ↓
+               Vehicle Counting
+                       ↓
+              Traffic Density
+                       ↓
+              Risk Assessment
+                       ↓
+             Visual Monitoring
 ```
-
----
-
-# 🛠️ Technologies
-
-### Current
-
-* R
-* RStudio
-* Tidyverse
-* dplyr
-* ggplot2
-* Random Forest
-* Logistic Regression
-* Git
-* GitHub
-
-### Planned
-
-* Real-time APIs
-* Interactive maps
-* Web dashboard
-* JavaScript / web technologies
-* Database integration
-* Cloud deployment
 
 ---
 
 # 📁 Project Structure
 
 ```text
-smart-traffic-2.0/
+Smart-Traffic-2.0/
 │
 ├── README.md
 │
 ├── data/
-│   └── README.md
+│   └── Traffic_Video.mp4
 │
 ├── R/
-│   ├── data_processing.R
-│   ├── risk_prediction.R
-│   └── real_time_monitoring.R
+│   └── smart_traffic_demo.py
 │
 ├── dashboard/
 │
 ├── models/
 │
 └── outputs/
+    └── frames/
 ```
 
 ---
 
-# 🔄 Development Workflow
+# 🛠️ Technologies
 
-```text
-Historical Data
-       ↓
-1.0 Analysis
-       ↓
-Risk Factors
-       ↓
-ML Model
-       ↓
-Real-Time Data
-       ↓
-Data Processing
-       ↓
-Live Risk Prediction
-       ↓
-Interactive Dashboard
-       ↓
-Smart Alerts
-```
-
----
-
-# 📌 Development Phases
-
-## Phase 1 — Foundation
-
-* [x] Create Smart Traffic 2.0 project
-* [x] Create project structure
-* [x] Connect 2.0 with 1.0 concept
-* [ ] Prepare real-time data layer
-
-## Phase 2 — Real-Time Data
-
-* [ ] Weather API integration
-* [ ] Traffic data integration
-* [ ] Data validation
-* [ ] Automated data updates
-
-## Phase 3 — Risk Engine
-
-* [ ] Adapt 1.0 risk logic
-* [ ] Prepare real-time features
-* [ ] Integrate ML model
-* [ ] Generate live risk scores
-* [ ] Risk-level classification
-
-## Phase 4 — Visualization
-
-* [ ] Interactive map
-* [ ] Live risk indicators
-* [ ] Traffic visualization
-* [ ] Weather visualization
-* [ ] Risk hotspots
-
-## Phase 5 — Smart Alerts
-
-* [ ] High-risk detection
-* [ ] Critical-risk detection
-* [ ] Safety recommendations
-* [ ] Automated alerts
-
-## Phase 6 — Dashboard
-
-* [ ] Live dashboard
-* [ ] Real-time statistics
-* [ ] Risk trends
-* [ ] Interactive map
-* [ ] Alert panel
-
-## Phase 7 — Deployment
-
-* [ ] Web application
-* [ ] Cloud deployment
-* [ ] Continuous monitoring
-* [ ] Production testing
-
----
-
-# 📊 Expected Outputs
-
-Smart Traffic 2.0 aims to produce:
-
-* Real-time risk score
-* Current weather condition
-* Current traffic condition
-* Risk level
-* High-risk locations
-* Interactive accident map
-* Safety recommendations
-* Real-time dashboard
-* Automated alerts
+| Technology          | Purpose                         |
+| ------------------- | ------------------------------- |
+| Python 3.13         | Computer Vision                 |
+| YOLO11n             | Vehicle Detection               |
+| OpenCV              | Video Processing                |
+| R                   | Data Analysis & Project Control |
+| Tidyverse           | Data Processing                 |
+| ggplot2             | Visualization                   |
+| Random Forest       | Accident Severity Prediction    |
+| Logistic Regression | Classification                  |
+| Git & GitHub        | Version Control                 |
 
 ---
 
 # ⚠️ Current Limitations
 
-Smart Traffic 2.0 is currently under development.
-
-At the current stage:
-
-* Real-time traffic integration is not complete
-* Real-time weather integration is not complete
-* Live accident feeds are not available yet
-* Interactive risk mapping is under development
-* Real-time prediction is under development
-* Web deployment is planned for a future phase
-
----
-
-# 🔮 Future Development
-
-The project will gradually evolve toward:
-
-```text
-Historical Analysis
-        ↓
-Real-Time Data
-        ↓
-Real-Time Risk Prediction
-        ↓
-Interactive Risk Map
-        ↓
-Smart Alerts
-        ↓
-Live Dashboard
-        ↓
-Web Application
-        ↓
-Cloud-Based Traffic Safety Platform
-```
-
----
-
-# 🌟 Expected Impact
-
-Smart Traffic 2.0 aims to support:
-
-* Early identification of dangerous conditions
-* Better understanding of traffic risk
-* Faster identification of accident-prone areas
-* Data-driven road safety decisions
-* Real-time driver awareness
-* Intelligent traffic monitoring
+* Current system uses a recorded traffic video
+* Current traffic thresholds are prototype rules
+* Speed estimation is not implemented
+* Live camera integration is not implemented
+* Real-time weather integration is not implemented
+* Accident detection is not implemented
+* Full integration with the Smart Traffic 1.0 risk model is not yet implemented
 
 ---
 
@@ -412,7 +295,7 @@ GitHub:
 
 [https://github.com/vemalaharshitha](https://github.com/vemalaharshitha)
 
-Smart Traffic 2.0 Repository:
+Smart Traffic 2.0:
 
 [https://github.com/vemalaharshitha/Smart-Traffic-2.0](https://github.com/vemalaharshitha/Smart-Traffic-2.0)
 
@@ -425,25 +308,35 @@ This project is intended for:
 * Educational purposes
 * Academic research
 * Data science experimentation
+* Computer vision research
 * Machine learning research
 * Traffic safety research
 * Portfolio development
 
 ---
 
-# 🚦 Smart Traffic 2.0
+# ⭐ Conclusion
 
-### From Historical Accident Analysis → Real-Time Intelligent Traffic Safety
+**Smart Traffic 2.0** extends the Smart Accident Visualization 1.0 project from historical accident analysis toward intelligent traffic monitoring.
 
-**Analyze → Predict → Monitor → Alert → Protect**
+The current system successfully processes a traffic video using **YOLO11n and OpenCV** to detect and classify vehicles.
 
----
+The project combines:
 
-## ⭐ Project Status
+* 🎥 Traffic video processing
+* 🤖 YOLO vehicle detection
+* 🚗 Vehicle classification
+* 🔢 Vehicle counting
+* 📊 Traffic-density analysis
+* ⚠️ Traffic-risk assessment
+* 🖥️ Visual traffic monitoring
+* 🧠 Accident-risk analysis foundation
 
-**Smart Traffic 2.0 — 🚧 Under Development**
+### 🚦 Smart Traffic 2.0
 
-Built on the foundation of **Smart Accident Visualization 1.0**.
+**Detect → Count → Analyze → Assess**
+
+**Smart Traffic 1.0 → Smart Traffic 2.0**
 
 ```
 ```
